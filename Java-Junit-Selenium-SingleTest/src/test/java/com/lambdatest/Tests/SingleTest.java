@@ -45,13 +45,13 @@ public  static WebDriver driver;
 		
 		if (username==null)
 			// Set you LAMBDATEST Username here if not Provided from Jenkins
-        	username = "nikhily";
+        	username = "qa";
         
         if (accesskey==null) 
         	// Set you LAMBDATEST AppKey here if not Provided from Jenkins
-        	accesskey = "3Z6PQHL1sUEW2nuvvPZxg7zom6y8ZqAvfPJBX5Ne2rWN3uwfGi";
+        	accesskey = "rTqssUKaL2NeGRASxJDl9NrBUCn6g1vFCdwEdFO8d0ndjAaT9l";
         
-        DesiredCapabilities capability = new DesiredCapabilities();
+                DesiredCapabilities capability = new DesiredCapabilities();
 		capability.setCapability(CapabilityType.BROWSER_NAME, browser);
 		capability.setCapability(CapabilityType.VERSION, version);
 		capability.setCapability(CapabilityType.PLATFORM, os);
@@ -72,8 +72,8 @@ public  static WebDriver driver;
 	@Test
 	public void test() {
 		 
-		//Launch the app
-		ToDo page = ToDo.visitPage(driver);
+	//Launch the app
+	ToDo page = ToDo.visitPage(driver);
 
         //Click on First Item
         page.clickOnFirstItem();
