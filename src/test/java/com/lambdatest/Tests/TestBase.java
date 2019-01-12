@@ -1,6 +1,5 @@
 package com.lambdatest.Tests;
 
-
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -14,38 +13,33 @@ import org.junit.runners.Parameterized;
 
 @Ignore
 @RunWith(Parallelized.class)
-public class TestBase  {
+public class TestBase {
 
 	public String platform;
 	public String browserName;
 	public String browserVersion;
-	public  static WebDriver driver;
-	
-	public static String username = System.getenv("LT_USERNAME");
-	public static String accesskey = System.getenv("LT_APPKEY");
-        public static String gridURL = System.getenv("LT_GRID_URL");
+	public static WebDriver driver;
 
 	@Parameterized.Parameters
 	public static LinkedList<String[]> getEnvironments() throws Exception {
 		LinkedList<String[]> env = new LinkedList<String[]>();
-		env.add(new String[]{"WIN10", "chrome", "64.0"});
-		env.add(new String[]{"WIN10","firefox","60.0"});
-		env.add(new String[]{"WIN7","internet explorer","10.0"});
+		env.add(new String[] { "WIN10", "chrome", "64.0" });
+		env.add(new String[] { "WIN10", "firefox", "60.0" });
+		env.add(new String[] { "WIN7", "internet explorer", "10.0" });
+		env.add(new String[] { "WIN7", "chrome", "67.0" });
+		env.add(new String[] { "WIN8", "firefox", "58.0" });
 
-		//add more browsers here
+		// add more browsers here
 
 		return env;
 	}
 
-
 	public TestBase(String platform, String browserName, String browserVersion) {
-		
+
 		this.platform = platform;
 		this.browserName = browserName;
 		this.browserVersion = browserVersion;
 	}
-
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -53,35 +47,28 @@ public class TestBase  {
 		capability.setCapability(CapabilityType.BROWSER_NAME, this.browserName);
 		capability.setCapability(CapabilityType.VERSION, this.browserVersion);
 		capability.setCapability(CapabilityType.PLATFORM, this.platform);
-		capability.setCapability("build", "Junit Parallel Tests");
+		capability.setCapability("build", System.getenv("LT_BUILD"));
+		capability.setCapability("name", "Single Junit Test");
 		capability.setCapability("network", true);
 		capability.setCapability("video", true);
 		capability.setCapability("console", true);
 		capability.setCapability("visual", true);
-        
-	if (username==null)
-		// Set you LAMBDATEST Username here if not Provided from Jenkins
-        	username = "qa";
-        
-        if (accesskey==null) 
-        	// Set you LAMBDATEST AppKey here if not Provided from Jenkins
-        	accesskey = "rTqssUKaL2NeGRASxJDl9NrBUCn6g1vFCdwEdFO8d0ndjAaT9l";
-        
-        if (gridURL==null)
-        	gridURL = "https://" + username + ":" + accesskey + "@beta-hub.lambdatest.com/wd/hub";
-        
-        
-		driver = new RemoteWebDriver(
-			new URL(gridURL),capability);
+
+		String username = Configuration.readConfig("LambdaTest_UserName");
+		String accesskey = Configuration.readConfig("LambdaTest_AppKey");
+		
+		String gridURL = "https://" + username + ":" + accesskey + "@beta-hub.lambdatest.com/wd/hub";
+
+		driver = new RemoteWebDriver(new URL(gridURL), capability);
 	}
 
-    @After
-    public void tearDown() throws Exception {
-        if (driver!=null)
-    	driver.quit();
-    }
-    
-    public WebDriver getWebDriver() {
-        return driver;
-    }
+	@After
+	public void tearDown() throws Exception {
+		if (driver != null)
+			driver.quit();
+	}
+
+	public WebDriver getWebDriver() {
+		return driver;
+	}
 }
