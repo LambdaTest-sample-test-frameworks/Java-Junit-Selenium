@@ -32,7 +32,7 @@ public class SingleJenkinsTest {
 		capability.setCapability(CapabilityType.VERSION, version);
 		capability.setCapability(CapabilityType.PLATFORM, os);
 		capability.setCapability("build", System.getenv("LT_BUILD"));
-		capability.setCapability("name", "TestNG Single");
+		capability.setCapability("name", "Single Junit Test");
 		capability.setCapability("screen_resolution", res);
 		capability.setCapability("network", true);
 		capability.setCapability("video", true);

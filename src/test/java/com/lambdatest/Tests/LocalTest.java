@@ -34,8 +34,8 @@ public class LocalTest {
 		capability.setCapability(CapabilityType.BROWSER_NAME, browser);
 		capability.setCapability(CapabilityType.VERSION, version);
 		capability.setCapability(CapabilityType.PLATFORM, os);
-		capability.setCapability("build", "Junit Single Test");
-		capability.setCapability("name", "JUnit Single");
+		capability.setCapability("build", "Junit local Test");
+		capability.setCapability("name", "JUnit local");
 		capability.setCapability("screen_resolution", res);
 		capability.setCapability("network", true);
 		capability.setCapability("video", true);
